@@ -1,0 +1,61 @@
+
+################# COLORS #################
+bold='';
+reset="\e[0m";
+black="\e[1;30m";
+blue="\e[1;34m";
+cyan="\e[1;36m";
+green="\e[1;32m";
+orange="\e[1;33m";
+purple="\e[1;35m";
+red="\e[1;31m";
+violet="\e[1;35m";
+white="\e[1;37m";
+yellow="\e[1;33m";
+
+
+################# HELPERS #################
+exists() {
+  which "${1}" >/dev/null 2>&1 || echo -e \
+                                  "${red}Error:${reset} '${1}'" \
+                                  "command not found"
+}
+
+
+################# ALIASES #################
+alias ls="ls -hF --color=auto"
+alias l="ls -CF"
+
+microk8s.set() {
+  exists microk8s.kubectl
+  alias kubectl='microk8s.kubectl'
+}
+
+microk8s.unset() {
+  exists microk8s.kubectl
+  unalias kubectl
+}
+
+
+##########################################
+# SYSTEMD SUPPORT
+if which systemctl &>/dev/null; then
+  start() {
+    sudo systemctl start $1.service
+  }
+  restart() {
+    sudo systemctl restart $1.service
+  }
+  stop() {
+    sudo systemctl stop $1.service
+  }
+  enable() {
+    sudo systemctl enable $1.service
+  }
+  status() {
+    sudo systemctl status $1.service
+  }
+  disable() {
+    sudo systemctl disable $1.service
+  }
+fi
