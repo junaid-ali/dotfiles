@@ -1,0 +1,23 @@
+#!/bin/bash
+
+echo "Plugin name should not have any extension suffixed! All other naming conventions" \
+     "are available here: https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/"
+read -p "Press 'Enter' to continue installation"
+
+[[ -z ${1} ]] && echo -e "ERROR: Missing plugin script path!" && exit 1
+
+PLUGIN_BIN_PATH=$HOME/.kube/plugins/
+[[ ! -d ${PLUGIN_BIN_PATH} ]] && mkdir -p ${PLUGIN_BIN_PATH}
+
+PLUGIN=${1}
+
+case ":$PATH:" in
+  *":${PLUGIN_BIN_PATH}:"*) :;; # already there
+  *) PATH="$PATH:${PLUGIN_BIN_PATH}";; # or PATH="$PATH:$new_entry"
+esac
+
+PLUGIN_FULL_NAME=kubectl-$(basename ${PLUGIN})
+[[ -n ${2} ]] && CMD_PREFIX=${2} && PLUGIN_FULL_NAME=kubectl-${2}-$(basename ${PLUGIN})
+
+cp ${PLUGIN} ${PLUGIN_BIN_PATH}/${PLUGIN_FULL_NAME}
+chmod +x ${PLUGIN_BIN_PATH}/${PLUGIN_FULL_NAME}
