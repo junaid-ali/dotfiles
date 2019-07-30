@@ -81,15 +81,19 @@ git_prompt() {
 # favorite prompt.
 #PS1='$debian_chroot\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w$(git_prompt)\[\033[00m\]\$ '
 
+is_virtualenv() {
+    [[ -n ${VIRTUAL_ENV} ]] && printf "($(basename ${VIRTUAL_ENV})) "
+}
+
 make_prompt() {
-  # NOTE: Removing everything after the last $ (workaround for byobu where
-  #       there is $(byobu_prompt_symbol) is being called
-  NEW_PS1=$(echo -e "${OLD_PS1}" | awk 'BEGIN{FS=OFS="$"} NF--')
+    # NOTE: Removing everything after the last $ (workaround for byobu where
+    #       there is $(byobu_prompt_symbol) is being called
+    NEW_PS1=$(echo -e "${OLD_PS1}" | awk 'BEGIN{FS=OFS="$"} NF--')
 
-  # Remove any trailing \ from the end
-  NEW_PS1=$(echo -e "${NEW_PS1}" | sed 's:\\*$::')
+    # Remove any trailing \ from the end
+    NEW_PS1=$(echo -e "${NEW_PS1}" | sed 's:\\*$::')
 
-  PS1="${NEW_PS1} $(git_prompt)$ "
+    PS1="$(is_virtualenv)${NEW_PS1} $(git_prompt)$ "
 }
 
 PROMPT_COMMAND='make_prompt'
