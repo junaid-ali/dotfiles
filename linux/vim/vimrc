@@ -1,3 +1,6 @@
 if &diff
     colorscheme monokai
 endif
+
+"selecting and copying to system clipboard when x11 isn't available
+vnoremap <C-C> :w !xclip -i -sel c<CR><CR>
