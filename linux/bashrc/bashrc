@@ -59,3 +59,13 @@ if which systemctl &>/dev/null; then
     sudo systemctl disable $1.service
   }
 fi
+
+
+######################################
+# DOCKER
+docker_remove_all() {
+  for container in $(docker ps -a | awk '{print $1}' | grep -v CONT)
+  do
+    docker rm -f $container
+  done
+}
