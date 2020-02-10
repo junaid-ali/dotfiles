@@ -26,11 +26,18 @@ exists() {
 alias ls="ls -hF --color=auto"
 alias l="ls -CF"
 
+
+# Args:
+# $1: file path
+# $2: destination path
+# $3: Rename file in destination path (optional)
 mvx() {
   set -x
   FILENAME=$(basename ${1})
-  sudo mv ${1} ${2}
-  sudo chmod +x ${2}/${FILENAME}
+  NEW_FILENAME=${3}
+  DEST_FILENAME=${NEW_FILENAME:-$FILENAME}
+  sudo mv ${1} ${2}/${DEST_FILENAME}
+  sudo chmod +x ${2}/${DEST_FILENAME}
   set +x
 }
 
