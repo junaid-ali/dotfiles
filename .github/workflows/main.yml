@@ -1,5 +1,5 @@
 ---
-name: Actions tester
+name: Actions main
 
 on:
 #  push:
@@ -16,11 +16,23 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
+  build-1:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - name: sleep
+        run: sleep 5
+        
       - name: Validate step is run
         run: echo 'File/s changed!!'
+        
+  build-2:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: just another job
+        run: echo 'Second job'
