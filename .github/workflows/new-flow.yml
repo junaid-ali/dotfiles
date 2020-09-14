@@ -16,3 +16,6 @@ jobs:
     steps:
       - name: A new job
         run: echo 'Actions new job'
+        
+      - name: sleep step
+        run: sleep 10
