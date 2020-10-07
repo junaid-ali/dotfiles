@@ -4,7 +4,7 @@ name: Actions new
 on:
   push:
     paths:
-    - 'mac/**'
+    - 'linux/*/test*-json.txt'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:     
@@ -16,6 +16,3 @@ jobs:
     steps:
       - name: A new job
         run: echo 'Actions new job'
-        
-      - name: sleep step
-        run: sleep 10
