@@ -3,8 +3,7 @@ name: Actions new
 
 on:
   push:
-    paths:
-    - 'mac/**'
+    branches: master
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:     
@@ -15,7 +14,10 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: A new job
-        run: echo 'Actions new job'
+        id: step_1
+        run: |
+          echo 'Actions new job'
+          echo ::set-output name=output::nothing
         
       - name: sleep step
-        run: sleep 10
+        run: echo ${{ steps.step_1.outputs.output }}
