@@ -16,7 +16,7 @@ jobs:
       - name: A new job
         id: step_1
         run: |
-          ouput=$(echo 'Actions new job')
+          output=$(echo 'Actions new job')
           echo $output
           echo "::set-output name=output::$output"
         
