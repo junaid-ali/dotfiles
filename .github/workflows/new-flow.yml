@@ -21,4 +21,4 @@ jobs:
           echo "::set-output name=output::$output"
         
       - name: sleep step
-        run: echo ${{ steps.step_1.outputs.output }}
+        run: echo ${{ steps.step_1.outputs }}
