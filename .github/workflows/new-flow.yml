@@ -16,8 +16,8 @@ jobs:
       - name: A new job
         id: step_1
         run: |
-          echo 'Actions new job'
-          echo ::set-output name=output::nothing
+          ouput=$(echo 'Actions new job')
+          echo ::set-output name=output::$output
         
       - name: sleep step
         run: echo ${{ steps.step_1.outputs.output }}
