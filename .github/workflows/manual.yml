@@ -1,25 +1,22 @@
 name: Manually triggered workflow
 on:
-  workflow_dispatch:
-    inputs:
-      name:
-        description: 'Person to greet'
-        required: true
-        default: 'Mona the Octocat'
-      home:
-        description: 'location'
-        required: false
-        default: 'The Octoverse'
-      delete:
-        description: 'If enabled, removes all runners'
-        required: true
-        default: false
+  workflow_dispatch:    inputs:
+    operation_type:
+      description: "Operation type to add or delete a runner. Valid values are: 'add' or 'remove'"
+      default: add
+      required: true
+    token:
+      description: 'A GitHub actions runner token'
+      required: true
+    vm_name:
+      description: "If the 'Operation Type' is 'remove', the runner VM Name must be provided!"
+      required: false
 
 jobs:
   say_hello:
     runs-on: ubuntu-latest
     steps:
     - run: |
-        echo "Hello ${{ github.event.inputs.name }}!"
-        echo "- in ${{ github.event.inputs.home }}!"
-        echo "- in ${{ github.event.inputs.delete }}!"
+        echo "Hello ${{ github.event.inputs.operation_type }}!"
+        echo "- in ${{ github.event.inputs.token }}!"
+        echo "- in ${{ github.event.inputs.vm_name }}!"
