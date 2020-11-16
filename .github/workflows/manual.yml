@@ -1,16 +1,17 @@
 name: Manually triggered workflow
 on:
-  workflow_dispatch:    inputs:
-    operation_type:
-      description: "Operation type to add or delete a runner. Valid values are: 'add' or 'remove'"
-      default: add
-      required: true
-    token:
-      description: 'A GitHub actions runner token'
-      required: true
-    vm_name:
-      description: "If the 'Operation Type' is 'remove', the runner VM Name must be provided!"
-      required: false
+  workflow_dispatch:
+    inputs:
+      operation_type:
+        description: "Operation type to add or delete a runner. Valid values are: 'add' or 'remove'"
+        default: add
+        required: true
+      token:
+        description: 'A GitHub actions runner token'
+        required: true
+      vm_name:
+        description: "If the 'Operation Type' is 'remove', the runner VM Name must be provided!"
+        required: false
 
 jobs:
   say_hello:
